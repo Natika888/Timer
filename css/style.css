@@ -130,7 +130,9 @@ body {
     font-size: 2rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     row-gap: 20px;
+    column-gap: 20px;
     color: aliceblue;
 }
 
@@ -153,7 +155,7 @@ body {
     background-color: rgb(245,209,152);
 }
 .stop {
-    margin: 0 15vw;
+    /* margin: 0 15vw; */
     background-color: rgb(243,139,164);
 }
 
