@@ -1,4 +1,5 @@
 let counterValue = 0;
+let clickCounter = 0;
 let counterInterval;
 
 let buttons = document.querySelectorAll(".button");
@@ -24,7 +25,11 @@ function onBtnClick(e) {
 }
 
 function onStartClick(e) {
-    startCounter();
+    if (clickCounter === 0) {
+        startCounter();
+    }
+    
+    clickCounter++;
     
 }
 
@@ -39,4 +44,5 @@ function startCounter() {
 
   function stopCounter() {
     clearInterval(counterInterval);
+    clickCounter = 0;
   }
