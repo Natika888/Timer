@@ -47,23 +47,3 @@ function startCounter() {
     clickCounter = 0;
   }
 
-  // The wake lock sentinel.
-  let wakeLock = null;
-
-  async function requestWakeLock() {
-      try {
-          wakeLock = await navigator.wakeLock.request('screen');
-          console.log('Wake Lock is active');
-          wakeLock.addEventListener('release', () => {
-              console.log('Wake Lock was released');
-          });
-      } catch (err) {
-          console.error(`${err.name}, ${err.message}`);
-      }
-  }
-  
-  document.getElementById('wakeLockButton').addEventListener('click', () => {
-      if (!wakeLock) {
-          requestWakeLock();
-      }
-  });
