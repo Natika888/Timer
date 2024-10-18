@@ -48,25 +48,22 @@ function startCounter() {
   }
 
   // The wake lock sentinel.
-let wakeLock = null;
+  let wakeLock = null;
 
-// Function that attempts to request a screen wake lock.
-const requestWakeLock = async () => {
-  try {
-    wakeLock = await navigator.wakeLock.request();
-    wakeLock.addEventListener('release', () => {
-      console.log('Screen Wake Lock released:', wakeLock.released);
-    });
-    console.log('Screen Wake Lock released:', wakeLock.released);
-  } catch (err) {
-    console.error(`${err.name}, ${err.message}`);
+  async function requestWakeLock() {
+      try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('Wake Lock is active');
+          wakeLock.addEventListener('release', () => {
+              console.log('Wake Lock was released');
+          });
+      } catch (err) {
+          console.error(`${err.name}, ${err.message}`);
+      }
   }
-};
-
-// Request a screen wake lock…
-await requestWakeLock();
-// …and release it again after 5s.
-window.setTimeout(() => {
-  wakeLock.release();
-  wakeLock = null;
-}, 5000);
+  
+  document.getElementById('wakeLockButton').addEventListener('click', () => {
+      if (!wakeLock) {
+          requestWakeLock();
+      }
+  });
